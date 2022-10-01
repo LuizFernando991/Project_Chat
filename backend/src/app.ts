@@ -1,5 +1,8 @@
 import express, { Application } from 'express'
 import cors from 'cors'
+import UserRoutes from './routes/UserRoutes'
+import ChatRoutes from './routes/ChatRoutes'
+import MessageRoutes from './routes/MessageRoutes'
 
 const app : Application = express()
 
@@ -12,6 +15,10 @@ app.use(express.json())
 app.use(cors({ credentials : true, origin : 'http://localhost:3000'}))
 //Public folder
 app.use(express.static(__dirname + '/public'))
+//Routes
+app.use('/user', UserRoutes)
+app.use('/chat', ChatRoutes)
+app.use('/message', MessageRoutes)
 //Init server
 app.listen(5050, ()=>{
     console.log('server on')
