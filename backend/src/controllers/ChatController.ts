@@ -42,7 +42,7 @@ export default class ChatController {
         }
         //Returning all chats
         try {
-            const chats = await Chat.find({ members: {$in: [currentUserId]} })
+            const chats = await Chat.find({ members: {$in: [currentUserId]} }).populate("members", ["name", "username", "imageProfile"])
             return res.status(200).json({ chats })
         } catch(err) {
             return res.status(500).json({ message: 'internal error'})

@@ -6,7 +6,9 @@ import Chat from '../models/Chat'
 export default class MessageController {
     
     public static async createMessage(req: Request, res: Response): Promise<Response> {
-        const { chatId, senderId, text }: { chatId: string, senderId: string, text: string } = req.body
+        const { chatId, text }: { chatId: string, text: string } = req.body
+        //Getting sender user
+        const userId = getUserByToken(req)
         //Getting current chat
         const chat = await Chat.findById(chatId)
         if(!chat) {
@@ -14,7 +16,7 @@ export default class MessageController {
         }
         const newMessage = new Message({
             chatId: chat._id,
-            senderId,
+            userId,
             text
         })
 
