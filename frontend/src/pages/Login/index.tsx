@@ -1,17 +1,23 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
-import * as Styled from './styles'
-import ILogin from '../../types/LoginType'
 import { AiOutlineUser } from 'react-icons/ai'
 import { GiPadlock } from 'react-icons/gi'
 import { useNavigate } from 'react-router-dom'
+import ILogin from '../../types/LoginType'
+import * as Styled from './styles'
 
 function Login() {
     const [ loginForm, setLoginForm ] = useState<ILogin>({ username: '', password: ''})
     const [ errorMessage, setErrorMessage ] = useState<string>('')
 
-    const { login } = useContext(AuthContext)
+    const { login, isAuthenticated } = useContext(AuthContext)
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(isAuthenticated){
+            navigate('/')
+        }
+    }, [isAuthenticated])
     
     function handleOnInputChange(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
         setLoginForm({ ...loginForm, [e.target.name]: e.target.value })

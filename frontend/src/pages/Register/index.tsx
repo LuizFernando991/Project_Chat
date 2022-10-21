@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react' 
+import { useState, useContext, useEffect } from 'react' 
 import IRegister from '../../types/RegisterType' 
 import * as Styled from './styles'
 import { AiOutlineUser } from 'react-icons/ai'
@@ -10,8 +10,14 @@ function Register() {
     const [ registerForm, setLoginForm ] = useState<IRegister>({ username: '', password: '', name: ''})
     const [ errorMessage, setErrorMessage ] = useState<string>('')
 
-    const { registerUser } = useContext(AuthContext)
+    const { registerUser, isAuthenticated } = useContext(AuthContext)
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        if( isAuthenticated ){
+            navigate('/')
+        }
+    }, [isAuthenticated])
 
     function handleOnInputChange(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
         setLoginForm({ ...registerForm, [e.target.name]: e.target.value })
