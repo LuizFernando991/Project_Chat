@@ -1,22 +1,43 @@
-import { useContext, useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAPI } from '../../helpers/api'
 import { Conversation } from '../../components/Conversation'
 import { ChatBox } from '../../components/ChatBox'
 import IChat from '../../types/ChatType'
+import IMessage from '../../types/MessageType'
 import * as Styled from './styles'
 
 function Home() {
 
     const [chats, setChats] = useState<Array<IChat>>([])
     const [currentChat, setCurrentChat] = useState<IChat>()
+    const [onlineUsers, setOnlineUsers] = useState<any>()
+    const [receivedMessage, setReceivedMessage] = useState<IMessage>()
 
     const { user } = useContext(AuthContext)
+
+    const socket = useRef<any>()
 
     const api = getAPI()
 
     useEffect(() => {
         api.get('/chat/getUserChats', { data: { id: user?.id}}).then(r => setChats(r.data.chats))
+    }, [])
+
+    useEffect(()=>{
+        socket.current = io('http://localhost:8800')
+        socket.current.emit('new-user-add', user?.id)
+        socket.current.on('get-users', (users: any)=> {
+            setOnlineUsers(users)
+        })
+    }, [user])
+
+    useEffect(()=>{
+        socket.current.on('receive-message', (data: any)=> {
+            console.log(data)
+            setReceivedMessage(data)
+        })
     }, [])
 
     return (
@@ -34,7 +55,7 @@ function Home() {
                 </Styled.LeftSideChat>
                 <Styled.RightSideChat>
                     {
-                        currentChat ? <ChatBox user={user} currentChat={currentChat}/> : ''
+                        currentChat ? <ChatBox receivedMessage={receivedMessage} socket={socket} user={user} currentChat={currentChat}/> : ''
                     }
                 </Styled.RightSideChat>
             </Styled.ChatContainer>

@@ -4,12 +4,12 @@ import * as Styled from './styles'
 
 export interface MessageProps {
     message: IMessage
-    senderId: string | undefined
+    userId: string | undefined
 }
 
-export function Message({ message, senderId }: MessageProps) {
+export function Message({ message, userId }: MessageProps) {
 
-    const isFromCurrentUser = message._id === senderId
+    const isFromCurrentUser = message.senderId === userId
 
     return (
         <Styled.Container isFromCurrentUser={isFromCurrentUser}>

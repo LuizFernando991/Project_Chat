@@ -16,7 +16,7 @@ export default class MessageController {
         }
         const newMessage = new Message({
             chatId: chat._id,
-            userId,
+            senderId: userId,
             text
         })
 

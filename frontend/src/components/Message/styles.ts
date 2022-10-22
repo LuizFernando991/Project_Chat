@@ -9,7 +9,7 @@ export const Container = styled.div<Props>`
     display: flex;
     margin-bottom: 5px;
     ${({ isFromCurrentUser}) => css`
-        ${ !isFromCurrentUser ? 
+        ${ isFromCurrentUser ? 
             'justify-content: end;' 
             : 
             'justify-content: start;'
@@ -24,12 +24,12 @@ export const Message = styled.div<Props>`
     font-size: 17px;
     font-weight: 500;
     ${({ isFromCurrentUser}) => css`
-        ${ isFromCurrentUser ? 
+        ${ !isFromCurrentUser ? 
             'background: linear-gradient(90deg, rgba(3,150,255,1) 43%, rgba(86,176,238,1) 100%);' 
             : 
             'background: linear-gradient(270deg, rgba(240,78,217,1) 43%, rgba(235,129,240,1) 89%);'
         }
-        ${ isFromCurrentUser ? 
+        ${ !isFromCurrentUser ? 
             'border-radius: 10px 10px 10px 0px;' 
             : 
             'border-radius: 10px 10px 0px 10px;'

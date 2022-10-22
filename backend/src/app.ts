@@ -3,6 +3,7 @@ import cors from 'cors'
 import UserRoutes from './routes/UserRoutes'
 import ChatRoutes from './routes/ChatRoutes'
 import MessageRoutes from './routes/MessageRoutes'
+import './socket'
 
 const app : Application = express()
 
