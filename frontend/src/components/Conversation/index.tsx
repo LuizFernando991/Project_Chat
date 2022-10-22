@@ -4,14 +4,17 @@ import * as Styled from './styles'
 interface ConversationProps {
     chat: IChat
     userId: string | undefined
+    onlineUsers: Array<{ userId: string, socketId: string}> | null
 }
 
-export function Conversation({ chat, userId }: ConversationProps) {
+export function Conversation({ chat, userId, onlineUsers }: ConversationProps) {
 
     const user = chat.members.find(member => member._id != userId)
 
+    const isOnline = onlineUsers?.some((e) => e.userId === user?._id) || false
+
     return (
-        <Styled.Container>
+        <Styled.Container isOnline={isOnline}>
             <div>
                 <div className='online-dot' />
                 <img 

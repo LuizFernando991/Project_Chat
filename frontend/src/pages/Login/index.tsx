@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { AiOutlineUser } from 'react-icons/ai'
 import { GiPadlock } from 'react-icons/gi'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ILogin from '../../types/LoginType'
 import * as Styled from './styles'
 
@@ -58,6 +58,9 @@ function Login() {
                     <button type='submit'>LOGIN</button>
                 </Styled.LoginForm>
                 { errorMessage ? <Styled.ErrorMessage>{errorMessage}!</Styled.ErrorMessage> : ''}
+                <Styled.RegisterLink>
+                    <Link to='/register'>Register</Link>
+                </Styled.RegisterLink>
             </Styled.LoginContainer>
         </Styled.Container>
     )

@@ -29,6 +29,30 @@ export const LeftSideChat = styled.div`
     border-radius: 20px;
 `
 
+export const NewChat = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
+    img {
+        width: 100px;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: ${({ theme }) => theme.colors.softGrey};
+        cursor: pointer;
+        &:hover {
+            color: ${({ theme }) => theme.colors.blue};
+        }
+    }
+`
+
 export const RightSideChat = styled.div`
     display: flex;
     flex-direction: column;

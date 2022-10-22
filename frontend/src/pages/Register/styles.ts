@@ -111,3 +111,16 @@ export const ErrorMessage = styled.p`
     font-weight: 500;
     margin-top: 20px;
 `
+
+export const LoginLink = styled.div`
+    margin-top: 40px;
+
+    a{ 
+        color: ${({ theme }) => theme.colors.blue};
+        font-weight: bold;
+    }
+
+    a:visited {
+        color: ${({ theme }) => theme.colors.blue};
+    }
+`

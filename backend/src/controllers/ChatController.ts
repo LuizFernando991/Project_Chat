@@ -27,7 +27,7 @@ export default class ChatController {
         })
 
         try {
-            const data = await NewChat.save()
+            const data = await (await NewChat.save()).populate("members", ["name", "username", "imageProfile"])
             return res.status(200).json({ data })
         } catch(err) {
             return res.status(500).json({ message: 'internal error'})

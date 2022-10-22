@@ -104,3 +104,15 @@ export const ErrorMessage = styled.p`
     font-weight: 500;
     margin-top: 20px;
 `
+export const RegisterLink = styled.div`
+    margin-top: 40px;
+
+    a{ 
+        color: ${({ theme }) => theme.colors.blue};
+        font-weight: bold;
+    }
+
+    a:visited {
+        color: ${({ theme }) => theme.colors.blue};
+    }
+`

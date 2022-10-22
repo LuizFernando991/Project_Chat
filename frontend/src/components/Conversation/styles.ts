@@ -1,6 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export type Props = {
+    isOnline: boolean
+}
+
+export const Container = styled.div<Props>`
     display: flex;
     align-items: center;
     position: relative;
@@ -20,6 +24,10 @@ export const Container = styled.div`
         position: absolute;
         top: 8px;
         left: 45px;
+
+        ${({ isOnline }) => css`
+            ${ isOnline ? '' : 'display: none;'}
+        `}
     }
 
 `

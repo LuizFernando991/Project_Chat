@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react' 
-import IRegister from '../../types/RegisterType' 
-import * as Styled from './styles'
+import { useNavigate, Link } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext'
 import { AiOutlineUser } from 'react-icons/ai'
 import { GiPadlock } from 'react-icons/gi'
-import { AuthContext } from '../../contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import IRegister from '../../types/RegisterType' 
+import * as Styled from './styles'
 
 function Register() {
     const [ registerForm, setLoginForm ] = useState<IRegister>({ username: '', password: '', name: ''})
@@ -78,6 +78,9 @@ function Register() {
                     <button type='submit'>Register</button>
                 </Styled.RegisterForm>
                 { errorMessage ? <Styled.ErrorMessage>{errorMessage}!</Styled.ErrorMessage> : ''}
+                <Styled.LoginLink>
+                    <Link to='/login'>Login</Link>
+                </Styled.LoginLink>
             </Styled.RegisterContainer>
         </Styled.Container>
     )

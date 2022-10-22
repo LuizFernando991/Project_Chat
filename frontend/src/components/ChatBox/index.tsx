@@ -9,17 +9,16 @@ import * as Styled from './styles'
 
 export interface ChatBoxProps {
     user: IUser | null
-    currentChat: IChat | undefined
+    currentChat: IChat | null
     socket: any
-    receivedMessage: IMessage | undefined
+    receivedMessage: IMessage | null
 }
 
 export function ChatBox({ user, currentChat, socket, receivedMessage }: ChatBoxProps) {
 
     const [messages, setMessages] = useState<Array<IMessage>>([])
     const [newMessage, setNewMessage] = useState<string>('')
-    const scroll = useRef<any>(null)
-    const messageContainer = useRef<any>(null)
+    const scroll = useRef<HTMLDivElement | null>(null)
 
     const receivedUser = currentChat?.members.find(member => member._id != user?.id)
 
@@ -71,7 +70,7 @@ export function ChatBox({ user, currentChat, socket, receivedMessage }: ChatBoxP
                 <h3>{receivedUser?.name}</h3>
             </Styled.ChatHeader>
             <Styled.Border />
-            <Styled.MessagesContainer ref={messageContainer}>
+            <Styled.MessagesContainer>
                 {
                     messages.map((mess, index) => <div key={index} ref={scroll}><Message   message={mess} userId={user?.id}/></div>)
                 }
