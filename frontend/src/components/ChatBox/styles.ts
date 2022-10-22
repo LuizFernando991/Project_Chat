@@ -24,3 +24,9 @@ export const Border = styled.div`
     margin: 0 auto;
     background-color: ${({ theme }) => theme.borderColor.default};
 `
+
+export const MessagesContainer = styled.div`
+    width: 95%;
+    height: 500px;
+    margin: 10px auto;
+`

@@ -35,7 +35,6 @@ export const RightSideChat = styled.div`
     gap: 1rem;
     background-color: #fff;
     border-radius: 20px;
-    margin-left: 10px;
 `
 export const ChatListContainer = styled.div`
     h1 {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { getAPI } from '../../helpers/api'
+import { Message } from '../Message'
 import IChat from '../../types/ChatType'
+import IMessage from '../../types/MessageType'
 import IUser from '../../types/UserType'
 import * as Styled from './styles'
 
@@ -11,7 +13,7 @@ export interface ChatBoxProps {
 
 export function ChatBox({ user, currentChat }: ChatBoxProps) {
 
-    const [messages, setMessages] = useState<Array<any>>([])
+    const [messages, setMessages] = useState<Array<IMessage>>([])
 
     const receivedUser = currentChat?.members.find(member => member._id != user?.id)
 
@@ -31,9 +33,11 @@ export function ChatBox({ user, currentChat }: ChatBoxProps) {
                 <h3>{receivedUser?.name}</h3>
             </Styled.ChatHeader>
             <Styled.Border />
-            {
-                messages.map((mess, index) => <div key={index}>{mess.text}</div>)
-            }
+            <Styled.MessagesContainer>
+                {
+                    messages.map((mess, index) => <Message key={index} message={mess} senderId={user?.id}/>)
+                }
+            </Styled.MessagesContainer>
         </Styled.Container>
     )
 }
